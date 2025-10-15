@@ -1,5 +1,7 @@
 package calculator.view.handler;
 
+import calculator.exception.CalculatorException;
+import calculator.exception.code.IOErrorCode;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputHandler {
@@ -7,7 +9,7 @@ public class InputHandler {
         try {
             return Console.readLine();
         } catch (Exception e) {
-            throw new IllegalArgumentException("입력값이 올바르지 않습니다.");
+            throw new CalculatorException(IOErrorCode.INPUT_ERROR);
         }
     }
 }
