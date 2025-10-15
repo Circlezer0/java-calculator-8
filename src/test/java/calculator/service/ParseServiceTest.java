@@ -3,6 +3,7 @@ package calculator.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import calculator.dto.ParseHeaderResult;
 import calculator.model.Delimiter;
 import calculator.model.Tokens;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,7 @@ public class ParseServiceTest {
         ParseService parseService = new ParseService();
         String input = "1,2,3";
         ParseHeaderResult parsedDelimiter = parseService.parseDelimiter(input);
-        String formula = parsedDelimiter.fomula();
+        String formula = parsedDelimiter.formula();
         String delimiter = parsedDelimiter.delimiter();
 
         assertEquals("1,2,3", formula);
@@ -26,7 +27,7 @@ public class ParseServiceTest {
         ParseService parseService = new ParseService();
         String input = "//;\\n1;2;3";
         ParseHeaderResult parsedDelimiter = parseService.parseDelimiter(input);
-        String formula = parsedDelimiter.fomula();
+        String formula = parsedDelimiter.formula();
         String delimiter = parsedDelimiter.delimiter();
         assertEquals("1;2;3", formula);
         assertEquals(";", delimiter);
@@ -37,7 +38,7 @@ public class ParseServiceTest {
         ParseService parseService = new ParseService();
         String input = "//***\\n1***2***3";
         ParseHeaderResult parsedDelimiter = parseService.parseDelimiter(input);
-        String formula = parsedDelimiter.fomula();
+        String formula = parsedDelimiter.formula();
         String delimiter = parsedDelimiter.delimiter();
         assertEquals("1***2***3", formula);
         assertEquals("***", delimiter);
@@ -48,7 +49,7 @@ public class ParseServiceTest {
         ParseService parseService = new ParseService();
         String input = "// ; ;\\n 1; 2; 3 ";
         ParseHeaderResult parsedResult = parseService.parseDelimiter(input);
-        String formula = parsedResult.fomula();
+        String formula = parsedResult.formula();
         String delimiter = parsedResult.delimiter();
         assertEquals("1; 2; 3", formula);
         assertEquals("; ;", delimiter);
