@@ -8,12 +8,15 @@ import java.util.List;
 
 public class ParseService {
 
+    private static final String DELIMITER_PREFIX = "//";
+    private static final String DELIMITER_SUFFIX = "\\n";
+
     public ParseHeaderResult parseDelimiter(String input) {
         input = input.trim();
-        if (input.startsWith("//")) {
-            int endIdx = input.indexOf("\\n");
-            String delimiter = input.substring(2, endIdx).trim();
-            String formula = input.substring(endIdx + 2).trim();
+        if (input.startsWith(DELIMITER_PREFIX)) {
+            int suffixIdx = input.indexOf(DELIMITER_SUFFIX);
+            String delimiter = input.substring(DELIMITER_PREFIX.length(), suffixIdx).trim();
+            String formula = input.substring(suffixIdx + DELIMITER_SUFFIX.length()).trim();
             return new ParseHeaderResult(delimiter, formula);
         }
         return new ParseHeaderResult(null, input);
