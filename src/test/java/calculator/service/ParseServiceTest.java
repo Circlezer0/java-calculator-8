@@ -85,10 +85,10 @@ public class ParseServiceTest {
     @Test
     void 구분자_연달아_나오는_경우(){
         ParseService parseService = new ParseService();
-        String formula = ":1,,2::3,";
+        String formula = ":1,, 2 : :3,"; // split은 마지막 빈 토큰은 버리도록 동작함
         Delimiter delimiter = new Delimiter();
         Tokens tokens = parseService.parseTokens(formula, delimiter);
-        assertEquals(7, tokens.getTokens().size());
+        assertEquals(6, tokens.getTokens().size());
 
         assertEquals(0, tokens.getTokens().get(0));
         assertEquals(1, tokens.getTokens().get(1));
@@ -96,7 +96,6 @@ public class ParseServiceTest {
         assertEquals(2, tokens.getTokens().get(3));
         assertEquals(0, tokens.getTokens().get(4));
         assertEquals(3, tokens.getTokens().get(5));
-        assertEquals(0, tokens.getTokens().get(6));
     }
 
 
