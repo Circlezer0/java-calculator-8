@@ -1,5 +1,7 @@
 package calculator.model;
 
+import calculator.exception.CalculatorException;
+import calculator.exception.code.DelimiterErrorCode;
 import java.util.regex.Pattern;
 
 public class Delimiter {
@@ -23,21 +25,21 @@ public class Delimiter {
 
     private void validateCustomDelimiter(String customDelimiter) {
         if (customDelimiter == null) {
-            throw new IllegalArgumentException("커스텀 구분자는 null일 수 없습니다.");
+            throw new CalculatorException(DelimiterErrorCode.CUSTOM_DELIMITER_NOT_NULL);
         }
 
         customDelimiter = customDelimiter.trim();
 
         if (customDelimiter.isEmpty()) {
-            throw new IllegalArgumentException("커스텀 구분자는 빈 값일 수 없습니다.");
+            throw new CalculatorException(DelimiterErrorCode.CUSTOM_DELIMITER_EMPTY);
         }
 
         if (customDelimiter.contains(" ")) {
-            throw new IllegalArgumentException("커스텀 구분자에 공백이 포함될 수 없습니다.");
+            throw new CalculatorException(DelimiterErrorCode.CUSTOM_DELIMITER_CONTAINS_SPACE);
         }
 
         if (customDelimiter.chars().anyMatch(Character::isDigit)) {
-            throw new IllegalArgumentException("커스텀 구분자에 숫자가 포함될 수 없습니다.");
+            throw new CalculatorException(DelimiterErrorCode.CUSTOM_DELIMITER_CONTAINS_NUMBER);
         }
     }
 }
