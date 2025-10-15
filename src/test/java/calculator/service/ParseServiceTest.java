@@ -2,6 +2,7 @@ package calculator.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import calculator.dto.ParseHeaderResult;
 import calculator.model.Delimiter;
@@ -80,5 +81,40 @@ public class ParseServiceTest {
         assertEquals(3, tokens.getTokens().get(2));
         assertEquals(4, tokens.getTokens().get(3));
     }
+
+    @Test
+    void 구분자_연달아_나오는_경우(){
+        ParseService parseService = new ParseService();
+        String formula = ":1,,2::3,";
+        Delimiter delimiter = new Delimiter();
+        Tokens tokens = parseService.parseTokens(formula, delimiter);
+        assertEquals(7, tokens.getTokens().size());
+
+        assertEquals(0, tokens.getTokens().get(0));
+        assertEquals(1, tokens.getTokens().get(1));
+        assertEquals(0, tokens.getTokens().get(2));
+        assertEquals(2, tokens.getTokens().get(3));
+        assertEquals(0, tokens.getTokens().get(4));
+        assertEquals(3, tokens.getTokens().get(5));
+        assertEquals(0, tokens.getTokens().get(6));
+    }
+
+
+    @Test
+    void 문자_포함_수식_입력시_IllegalArgumentException() {
+        ParseService parseService = new ParseService();
+        String formula = "1,2:A";
+        Delimiter delimiter = new Delimiter();
+        assertThrows(IllegalArgumentException.class, () -> parseService.parseTokens(formula, delimiter));
+    }
+
+    @Test
+    void int_범위를_벗어난_수식_입력시_IllegalArgumentException() {
+        ParseService parseService = new ParseService();
+        String formula = "1,2:2147483648";
+        Delimiter delimiter = new Delimiter();
+        assertThrows(IllegalArgumentException.class, () -> parseService.parseTokens(formula, delimiter));
+    }
+
 
 }
