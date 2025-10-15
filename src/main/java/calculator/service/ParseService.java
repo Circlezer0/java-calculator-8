@@ -15,7 +15,7 @@ public class ParseService {
 
     public ParseHeaderResult parseDelimiter(String input) {
         input = input.trim();
-        if (input.startsWith(DELIMITER_PREFIX)) {
+        if (input.startsWith(DELIMITER_PREFIX) && input.contains(DELIMITER_SUFFIX)) {
             int suffixIdx = input.indexOf(DELIMITER_SUFFIX);
             String delimiter = input.substring(DELIMITER_PREFIX.length(), suffixIdx).trim();
             String formula = input.substring(suffixIdx + DELIMITER_SUFFIX.length()).trim();
