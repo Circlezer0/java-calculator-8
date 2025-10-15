@@ -11,6 +11,10 @@ public class Tokens {
         this.tokens = List.copyOf(tokens);
     }
 
+    public List<Integer> getTokens() {
+        return tokens;
+    }
+
     public int sum() {
         int sum = 0;
         for (int token : tokens) {
