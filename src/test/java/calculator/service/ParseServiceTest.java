@@ -71,7 +71,7 @@ public class ParseServiceTest {
     @Test
     void 커스텀_구분자로_수식_파싱_테스트() {
         ParseService parseService = new ParseService();
-        String formula = "1.2:3;4";
+        String formula = "1,2:3;4";
         Delimiter delimiter = new Delimiter(";");
         Tokens tokens = parseService.parseTokens(formula, delimiter);
         assertEquals(4, tokens.getTokens().size());
