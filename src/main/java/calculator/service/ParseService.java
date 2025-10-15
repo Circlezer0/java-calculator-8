@@ -1,6 +1,8 @@
 package calculator.service;
 
 import calculator.dto.ParseHeaderResult;
+import calculator.exception.CalculatorException;
+import calculator.exception.code.ParseErrorCode;
 import calculator.model.Delimiter;
 import calculator.model.Tokens;
 import java.util.Arrays;
@@ -42,13 +44,13 @@ public class ParseService {
         }
 
         if (!token.chars().allMatch(Character::isDigit)) {
-            throw new IllegalArgumentException("토큰에 숫자가 아닌 문자가 포함되어 있습니다");
+            throw new CalculatorException(ParseErrorCode.CONTAINS_NON_DIGIT);
         }
 
         try {
             return Integer.parseInt(token);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("토큰이 정수 범위를 벗어났습니다");
+            throw new CalculatorException(ParseErrorCode.INTEGER_OVERFLOW);
         }
     }
 }
