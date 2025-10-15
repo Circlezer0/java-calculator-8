@@ -115,5 +115,25 @@ public class ParseServiceTest {
         assertThrows(IllegalArgumentException.class, () -> parseService.parseTokens(formula, delimiter));
     }
 
+    @Test
+    void 구분자_suffix가_없는_경우는_파싱_안함() {
+        ParseService parseService = new ParseService();
+        String input = "//;1;2;3";
+        ParseHeaderResult parsedDelimiter = parseService.parseDelimiter(input);
+        String formula = parsedDelimiter.formula();
+        String delimiter = parsedDelimiter.delimiter();
+        assertEquals("//;1;2;3", formula);
+        assertNull(delimiter);
+    }
 
+    @Test
+    void 구분자_prefix가_없는_경우는_파싱_안함() {
+        ParseService parseService = new ParseService();
+        String input = "/;\\n1;2;3";
+        ParseHeaderResult parsedDelimiter = parseService.parseDelimiter(input);
+        String formula = parsedDelimiter.formula();
+        String delimiter = parsedDelimiter.delimiter();
+        assertEquals("/;\\n1;2;3", formula);
+        assertNull(delimiter);
+    }
 }
