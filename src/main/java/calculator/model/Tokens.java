@@ -1,5 +1,7 @@
 package calculator.model;
 
+import calculator.exception.CalculatorException;
+import calculator.exception.code.TokensErrorCode;
 import java.util.List;
 
 public class Tokens {
@@ -25,7 +27,7 @@ public class Tokens {
 
     private void validateArguments(List<Integer> tokens) {
         if (tokens.stream().anyMatch(t -> t < 0)) {
-            throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+            throw new CalculatorException(TokensErrorCode.NEGATIVE_NUMBER_NOT_ALLOWED);
         }
     }
 }
