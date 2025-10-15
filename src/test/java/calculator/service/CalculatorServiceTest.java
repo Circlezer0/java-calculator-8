@@ -13,7 +13,7 @@ public class CalculatorServiceTest {
     void test() {
         Tokens tokens = new Tokens(List.of(1,2,3));
         CalculatorService calculatorService = new CalculatorService();
-        int result = calculatorService.calculate(tokens);
+        int result = calculatorService.calculateSum(tokens);
         assertEquals(6, result);
     }
 
