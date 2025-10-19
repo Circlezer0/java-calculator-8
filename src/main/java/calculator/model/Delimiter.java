@@ -23,6 +23,11 @@ public class Delimiter {
         return delimiter;
     }
 
+    /**
+     * 커스텀 구분자의 유효성을 검사한다.
+     * 커스텀 구분자가 null, 빈 문자열, 공백 포함, 숫자 포함인 경우 예외를 발생시킨다.
+     * @param customDelimiter 커스텀 구분자 문자열
+     */
     private void validateCustomDelimiter(String customDelimiter) {
         if (customDelimiter == null) {
             throw new CalculatorException(DelimiterErrorCode.CUSTOM_DELIMITER_NOT_NULL);
