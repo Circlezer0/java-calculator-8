@@ -69,9 +69,7 @@ java
     │          └── OutputHandler.class
     └── exception
          ├── BaseErrorCode.interface
-         ├── BaseException.class (IllegalArgumentException extend)
-         ├── code
-         │    └── [각 상황에 따른 에러코드].enum (BaseErrorCode implement)
-         └── handler
-              └── [각 상황에 따른 예외객체].class (BaseException extend)
+         ├── CalculatorException.class (IllegalArgumentException extend)
+         └── code
+              └── [각 상황에 따른 에러코드].enum (BaseErrorCode implement)
 ```
